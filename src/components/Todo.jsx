@@ -29,7 +29,7 @@ export const Todo = ({islight, setLight}) => {
     const [ todo , setTodo] = useState(initialstate.todo)
     
   return (
-    <div className=' p-8 w-96 todo'>
+    <div className=' relative -top-32 w-96 todo border-2 border-blue-700 '>
       <div className=' flex items-center justify-between'>
         <h1 className=''>TODO</h1>
         <button className=' bg-transparent text-white rounded-xl' onClick={(e)=>{

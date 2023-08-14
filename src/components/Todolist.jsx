@@ -6,7 +6,10 @@ export const Todolist = ({list, dispatch}) => {
         { list.todo.map((item, index)=>{
             return(
                 <div key={index} className=' py-4 border-b border-white flex items-center justify-between'>
-                    <input type="checkbox" name="" id="" className='' />
+                    <label className="custom-checkbox">
+                        <input type="checkbox"/>
+                        <span className="checkmark"></span>
+                    </label>
                     <span className=' p-8 text-left'>{item.text}</span>
                     <button onClick={(e)=>{
                         e.preventDefault();

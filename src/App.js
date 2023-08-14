@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/App.css';
 import darkImg from './images/bg-desktop-dark.jpg'
 import lightImg from './images/bg-desktop-light.jpg'
 import { Todo } from './components/Todo';
@@ -12,9 +13,10 @@ const App = () => {
   const lightTheme = islight? 'bg-white'  : 'bg-slate-800'
   const lightBg = islight ? lightImg : darkImg
   return (
-    <div className={`h-screen w-full relative ${lightTheme}`}>
+    <div className={`h-auto w-full ${lightTheme} body`}>
       <img src={lightBg}/>
-      <div className=' absolute left-1/2 -translate-x-1/2 -translate-y-2/3'>
+      <div className=' h-full flex items-center justify-center pb-72 border-4 border-red-600 todo-container'>
+        
         <Todo setLight = {setLight} islight= {islight}/>
       </div>
     </div>

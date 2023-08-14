@@ -1,3 +1,50 @@
 .todo{
-    min-height: calc(100vh- 100px);
+    /* min-height: calc(100vh- 100px); */
 }
+
+.custom-checkbox {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    }
+
+    .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    }
+
+    .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background: linear-gradient( hsl(192, 100%, 67%) , hsl(280, 87%, 65%));
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    }
+
+    .custom-checkbox:hover input ~ .checkmark {
+    background: linear-gradient( hsl(192, 100%, 67%) , hsl(280, 87%, 65%)) 
+    }
+
+    .custom-checkbox input:checked ~ .checkmark {
+    background: linear-gradient( hsl(192, 100%, 67%) , hsl(280, 87%, 65%)) ;
+    border-color: #2196F3;
+    }
+
+    .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    }
+
+    .custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+    content: "\2713";
+    color: white;
+    font-size: 14px;
+    top: 3px;
+    left: 6px;
+    }
