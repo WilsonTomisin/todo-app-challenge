@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import darkImg from './images/bg-desktop-dark.jpg'
+import lightImg from './images/bg-desktop-light.jpg'
+import { Todo } from './components/Todo';
+import { useState } from 'react';
 
-function App() {
+
+const App = () => {
+  const [light, setLight] = useState(false)
+  const islight = light == true
+
+  const lightTheme = islight? 'bg-white'  : 'bg-slate-800'
+  const lightBg = islight ? lightImg : darkImg
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`h-screen w-full relative ${lightTheme}`}>
+      <img src={lightBg}/>
+      <div className=' absolute left-1/2 -translate-x-1/2 -translate-y-2/3'>
+        <Todo setLight = {setLight} islight= {islight}/>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
