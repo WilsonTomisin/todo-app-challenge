@@ -1,6 +1,6 @@
 import '../styles/todo.css'
 import React from 'react'
-import { useState, useReducer } from 'react'
+import { useState, useReducer , useRef } from 'react'
 import { Todolist } from './Todolist'
 import { Activegoals } from './Activegoals'
 import { Completedgoals } from './Completedgoals'
@@ -30,6 +30,15 @@ export const Todo = ({islight, setLight}) => {
 
     const [state, dispatch] = useReducer(stateReducer, initialstate )
     const [ todo , setTodo] = useState(initialstate.todo)
+    const [selectedLink, setSelectedLink] = useState('All')
+    const [completedGoals, setcompletedGoals] = useState([])
+    const inputRef = useRef(null)
+
+    const datalinks =[
+        {text:'All', path: '/'},
+        {text: 'active', path:'/active'},
+        {text:'completed', path:'/completed'}
+    ]
     
   return (
     <div className=' relative -top-32 w-auto  '>
@@ -45,10 +54,12 @@ export const Todo = ({islight, setLight}) => {
         <div className=''>
             <input type="text" className=' bg-slate-900 px-4 py-4 w-full rounded-lg text-white font-bold border-2 border-slate-950 hover:border-black'
              value={todo} 
+             ref={inputRef}
              onChange={(e)=>(setTodo(e.currentTarget.value))}/>
             <button className=' rounded-lg relative left-1/2 -translate-x-1/2 mt-2 text-white bg-green-500 px-6 py-2 add-btn '
             onClick={(e)=>{
                 e.preventDefault()
+                inputRef.current.focus()
                 setTodo('')
                 if (todo.length > 3) {
                     const updatedGoal={ id: Date.now() , text: todo, completed:false}
@@ -61,29 +72,30 @@ export const Todo = ({islight, setLight}) => {
                 
             }}>Add a goal </button>
             {<Routes>
-               <Route path='/' element={<Todolist list={state} dispatch={dispatch}/>} />
+               <Route path='/' element={<Todolist list={state} dispatch={dispatch} setcompletedGoals={setcompletedGoals}/>} />
                <Route path='/active' element={<Activegoals/>}/> 
-               <Route path='/completed' element={<Completedgoals/>}/>
+               <Route path='/completed' element={<Completedgoals completedGoals={completedGoals}/>}/>
                 
             </Routes>}
             <div className=' bg-slate-900 text-white flex items-center justify-between text-sm font-medium p-5'>
                 <div className=' pr-2'>{state.todo.length} items left</div>
                 <ul className=' flex items-center justify-between  px-5'>
-                    <li className=' '>
-                        <Link to={'/'}>
-                            All
-                        </Link>
-                    </li>
-                    <li className=' px-2'>
-                        <Link to={'/active'}>
-                            active
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to={'/completed'}>
-                            completed
-                        </Link>
-                    </li>
+                    {datalinks.map((item,index)=>{
+                        const padding = index == 1 ? 'px-2':''
+                        const active = selectedLink == item.text ? ' text-blue-600' : 'text-slate-400'
+                        return(
+                            <li  key={index} className={`${padding} ${active}`} onClick={(e)=>{
+                            setSelectedLink(item.text)
+                            console.log(selectedLink)
+                            }}>
+                                <Link to={item.path}>
+                                    {item.text}
+                                </Link>
+                            </li>
+
+                        )
+                    })}
+                    
                 </ul>
                 <div className=' pl-2'>Clear completed</div>
             </div>

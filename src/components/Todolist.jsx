@@ -2,16 +2,16 @@ import React from 'react';
 import { useState } from 'react';
 import '../styles/todolist.css'
 
-export const Todolist = ({list, dispatch}) => {
-    const [isChecked, setisChecked] = useState(false);
-    const [completedGoals, setCompletedgoals] = useState([])
-    const done = isChecked == true
+export const Todolist = ({list, dispatch, setcompletedGoals}) => {
+    // const [isChecked, setisChecked] = useState(false);
+    
+    // const done = isChecked == true
 
 
 
     
     
-    const newlength = list.todo.filter(item => !isChecked )
+    // const newlength = list.todo.filter(item => !isChecked )
     
     
     // console.log('new arr length is '+ completedGoals.length)
@@ -23,13 +23,19 @@ export const Todolist = ({list, dispatch}) => {
                 <div key={index} className=' goal px-2 border-b-2 border-slate-500 flex items-center justify-between'>
                     <label className="custom-checkbox">
                         <input name='myCheckbox' type="checkbox"  onClick={(e)=>{
-                            const completed = { ...item , completed : !item.completed}
-                            // item.completed == true,
-                            setisChecked(!isChecked)
+                            const completed = {...item ,completed : !item.completed}
+                            
+                            // setisChecked(!isChecked)
                             // console.log(isChecked)
-                            console.log(item.completed)
+                    
                             console.log(completed);
-                            return completed
+                            setcompletedGoals((preval)=>{
+                                return[
+                                    ...preval,
+                                    completed
+                                ]
+                            })
+                            // return completed
                         }} />
                         <span className="checkmark"></span>
                     </label>
