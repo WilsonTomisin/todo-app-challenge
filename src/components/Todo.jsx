@@ -97,7 +97,7 @@ export const Todo = ({islight, setLight}) => {
                     })}
                     
                 </ul>
-                <div className=' pl-2'>Clear completed</div>
+                <div className=' pl-2' onClick={()=> setcompletedGoals([])}>Clear completed</div>
             </div>
         </div>
         
