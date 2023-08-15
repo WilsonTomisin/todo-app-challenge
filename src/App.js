@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div className={`h-auto w-full ${lightTheme} body`}>
       <img src={lightBg}/>
-      <div className=' h-full flex items-center justify-center pb-72 border-4 border-red-600 todo-container'>
+      <div className=' h-full flex items-center justify-center pb-72 todo-container'>
         
         <Todo setLight = {setLight} islight= {islight}/>
       </div>
