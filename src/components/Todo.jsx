@@ -33,7 +33,13 @@ export const Todo = ({islight, setLight}) => {
     const [selectedLink, setSelectedLink] = useState('All')
     const [completedGoals, setcompletedGoals] = useState([])
     const inputRef = useRef(null)
+    
 
+    // const [ newTodo , setNewTodo] = useState(updatedGoal)
+
+    
+
+ 
     const datalinks =[
         {text:'All', path: '/'},
         {text: 'active', path:'/active'},
@@ -62,7 +68,7 @@ export const Todo = ({islight, setLight}) => {
                 inputRef.current.focus()
                 setTodo('')
                 if (todo.length > 3) {
-                    const updatedGoal={ id: Date.now() , text: todo, completed:false}
+                    const updatedGoal={ id: Date.now() , text: todo}
                     dispatch({
                         type: 'add',
                         payload: updatedGoal
@@ -72,13 +78,13 @@ export const Todo = ({islight, setLight}) => {
                 
             }}>Add a goal </button>
             {<Routes>
-               <Route path='/' element={<Todolist list={state} dispatch={dispatch} setcompletedGoals={setcompletedGoals}/>} />
+               <Route path='/' element={<Todolist list={state} dispatch={dispatch} completedGoals={completedGoals} setcompletedGoals={setcompletedGoals}/>} />
                <Route path='/active' element={<Activegoals/>}/> 
-               <Route path='/completed' element={<Completedgoals completedGoals={completedGoals}/>}/>
+               <Route path='/completed' element={<Completedgoals setcompletedGoals={setcompletedGoals} completedGoals={completedGoals}/>}/>
                 
             </Routes>}
             <div className=' bg-slate-900 text-white flex items-center justify-between text-sm font-medium p-5'>
-                <div className=' pr-2'>{state.todo.length} items left</div>
+                <div className=' pr-2'>{state.todo.length - completedGoals.length} items left</div>
                 <ul className=' flex items-center justify-between  px-5'>
                     {datalinks.map((item,index)=>{
                         const padding = index == 1 ? 'px-2':''
@@ -97,7 +103,7 @@ export const Todo = ({islight, setLight}) => {
                     })}
                     
                 </ul>
-                <div className=' pl-2' onClick={()=> setcompletedGoals([])}>Clear completed</div>
+                <div className=' pl-2 cursor-pointer  hover:text-fuchsia-600' onClick={()=> setcompletedGoals([])}>Clear completed</div>
             </div>
         </div>
         

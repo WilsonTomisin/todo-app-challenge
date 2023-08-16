@@ -1,7 +1,15 @@
 .remove-btn{
     opacity: 0;
     transition: 0.5s opacity ease-in-out;
+    
 }
 .goal:hover .remove-btn{
     opacity: 1;
+}
+.disabled{
+    color: transparent;
+    cursor: not-allowed;
+}
+.text-overline{
+    text-decoration: line-through;
 }
