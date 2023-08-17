@@ -10,6 +10,12 @@
     color: transparent;
     cursor: not-allowed;
 }
-.text-overline{
+
+.achieved {
+    color: gray;
     text-decoration: line-through;
+
+}
+.checked{
+    opacity: 0.3;
 }

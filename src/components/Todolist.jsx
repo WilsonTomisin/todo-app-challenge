@@ -1,32 +1,18 @@
 import React from 'react';
-import { useState } from 'react';
 import '../styles/todolist.css'
-import { Completedgoals } from './Completedgoals';
+
 
 export const Todolist = ({ list, dispatch, setcompletedGoals }) => {
-    const [isChecked, setIsChecked] = useState(false)
-    // const [ newA, setNewA] = useState()
     const newArr = [ ...list.todo]
-    
-    
-    // React.useEffect(()=>{
-    //     console.log(newArr)
-    // },[newArr])
-
-    // const handleItemClick=(itemId)=>{
-    //     setNewArr((preval)=>preval.map((item)=>(
-    //             itemId == item.id ? {...item,disabled: true} : item
-    //         ))
-    //     )
-        
-    // }
+    const isPlural = newArr.length > 1 ? 'goals' : 'goal'
     
 return (
-    <div className=' mt-4 bg-slate-900 rounded-lg text-white font-semibold'>
+    <div className=' mt-4 bg-slate-900 rounded-lg text-white font-semibold border-b-2 border-slate-500'>
     
         { newArr.map((item, index)=>{
             
-            const acheived = item.disabled == true ? 'text-overline':' ' ;
+            const acheived = item.disabled == true ? 'achieved':'' ;
+            const disabledCheckbox = item.disabled === true ? 'checked' :''
             return(
                 <div key={index} className={` goal px-2 border-b-2 border-slate-500 flex items-center justify-between`} disabled={item.disabled}>
                     <label className="custom-checkbox" >
@@ -39,9 +25,9 @@ return (
                                 ]
                             })
                             dispatch({type : 'checked' , payload : item.id})
-                            // handleItemClick(item.id)
-                        }} disabled={item.disabled} />
-                         <span className="checkmark"></span> 
+                            
+                        }} disabled={item.disabled} className= {`${disabledCheckbox}`} />
+                         <span className={`checkmark ${disabledCheckbox}`}></span> 
                     </label>
                     <span className={` w-full p-8 ${acheived} `}  >
                         {item.text}
@@ -53,6 +39,7 @@ return (
                 </div>
             )
         })}
+        <div className=' text-slate-500 p-3 font-normal'>You added { newArr.length} new {isPlural} </div>
         
     </div>
   )
