@@ -85,7 +85,7 @@ export const Todo = ({islight, setLight}) => {
             {<Routes>
                <Route path='/' element={<Todolist list={state} dispatch={dispatch}  setcompletedGoals={setcompletedGoals}  setActiveGoals={ setActiveGoals}  />} />
                <Route path='/active' element={<Activegoals list={state} completedGoals={ completedGoals} activeGoals = { activeGoals}/>}/> 
-               <Route path='/completed' element={<Completedgoals setcompletedGoals={setcompletedGoals} completedGoals={completedGoals}/>}/>
+               <Route path='/completed' element={<Completedgoals setcompletedGoals={setcompletedGoals} completedGoals={completedGoals} list={state}/>}/>
                 
             </Routes>}
             <div className=' bg-slate-900 text-white flex items-center justify-between text-sm font-medium p-5'>

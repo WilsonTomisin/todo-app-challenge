@@ -15,7 +15,7 @@ export const Footer = ({islight}) => {
            {links.map((item, index)=>{
             const paddingx = index==1 ? 'px-4' : ''
             return(
-                <li key={index} className={`${paddingx}`}>
+                <li key={index} className={`${paddingx} text-2xl`}>
                     <a href= {item.link} target='__blank'> {item.icon} </a>
                 </li>
             )
