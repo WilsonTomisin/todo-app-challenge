@@ -3,7 +3,10 @@ import { useState } from 'react';
 import '../styles/todolist.css'
 import { Completedgoals } from './Completedgoals';
 
-export const Todolist = ({list, dispatch, setcompletedGoals}) => {
+export const Todolist = ({ list, dispatch, setcompletedGoals }) => {
+    const [isChecked, setIsChecked] = useState(false)
+    // const [ newA, setNewA] = useState()
+    const newArr = [ ...list.todo]
     
     
     // React.useEffect(()=>{
@@ -20,24 +23,24 @@ export const Todolist = ({list, dispatch, setcompletedGoals}) => {
     
 return (
     <div className=' mt-4 bg-slate-900 rounded-lg text-white font-semibold'>
-        { list.todo.map((item, index)=>{
-            const acheived = item.completed == true ? 'text-overline':' ' ;
+    
+        { newArr.map((item, index)=>{
+            
+            const acheived = item.disabled == true ? 'text-overline':' ' ;
             return(
                 <div key={index} className={` goal px-2 border-b-2 border-slate-500 flex items-center justify-between`} disabled={item.disabled}>
                     <label className="custom-checkbox" >
                         <input name='myCheckbox' type="checkbox" onClick={(e)=>{
-                            const completed = {...item , completed : !item.completed}
-                            console.log(item.disabled)
+                            const completed = {...item , completed : true}
                             setcompletedGoals((preval)=>{
                                 return[
                                     ...preval,
                                     completed
                                 ]
                             })
+                            dispatch({type : 'checked' , payload : item.id})
                             // handleItemClick(item.id)
-                            console.log(item.completed)
-                            // console.log(`This is new arr :${newArr}`)
-                        }} disabled={item.completed} />
+                        }} disabled={item.disabled} />
                          <span className="checkmark"></span> 
                     </label>
                     <span className={` w-full p-8 ${acheived} `}  >

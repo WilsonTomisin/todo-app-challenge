@@ -14,17 +14,24 @@ export const Todo = ({islight, setLight}) => {
     const stateReducer =(state ,action)=>{
         if (action.type == 'add') {
             const Newgoal = action.payload
-            console.log(`new goal added: ${Newgoal.text}`);
+            // console.log(`new goal added: ${Newgoal.text}`);
             return {
                 ...state,
                 todo:[...state.todo, Newgoal]
             }
         } else if( action.type == 'remove'){
-            console.log('removed todo item.')
+            // console.log('removed todo item.')
             return{
                 todo: state.todo.filter((item)=> item.id !== action.payload)
             }
 
+        } else if (action.type == 'checked') {
+            return{
+                ...state,
+                todo: state.todo.map((item , index)=>(
+                    item.id == action.payload ? { ...item, disabled : true} : item
+                ))
+            }
         }
     }
 
@@ -32,10 +39,11 @@ export const Todo = ({islight, setLight}) => {
     const [ todo , setTodo] = useState(initialstate.todo)
     const [selectedLink, setSelectedLink] = useState('All')
     const [completedGoals, setcompletedGoals] = useState([])
+    const [activeGoals , setActiveGoals] = useState([])
     const inputRef = useRef(null)
     
-
-    // const [ newTodo , setNewTodo] = useState(updatedGoal)
+    let updatedGoal;
+    
 
     
 
@@ -68,18 +76,15 @@ export const Todo = ({islight, setLight}) => {
                 inputRef.current.focus()
                 setTodo('')
                 if (todo.length > 3) {
-                    const updatedGoal={ id: Date.now() , text: todo}
-                    dispatch({
-                        type: 'add',
-                        payload: updatedGoal
-                    })
-                    
+                    updatedGoal ={ id: Date.now() ,text: todo ,completed : false}
+                    dispatch({type: 'add', payload: updatedGoal})
                 }
+                // console.log(todo)
                 
             }}>Add a goal </button>
             {<Routes>
-               <Route path='/' element={<Todolist list={state} dispatch={dispatch} completedGoals={completedGoals} setcompletedGoals={setcompletedGoals}/>} />
-               <Route path='/active' element={<Activegoals/>}/> 
+               <Route path='/' element={<Todolist list={state} dispatch={dispatch}  setcompletedGoals={setcompletedGoals}  setActiveGoals={ setActiveGoals} updatedGoal={updatedGoal} />} />
+               <Route path='/active' element={<Activegoals list={state} completedGoals={ completedGoals} activeGoals = { activeGoals}/>}/> 
                <Route path='/completed' element={<Completedgoals setcompletedGoals={setcompletedGoals} completedGoals={completedGoals}/>}/>
                 
             </Routes>}
@@ -108,6 +113,7 @@ export const Todo = ({islight, setLight}) => {
         </div>
         
     </div>
+
   )
 }
 

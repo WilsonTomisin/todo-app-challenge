@@ -6,6 +6,9 @@ import { Todo } from './components/Todo';
 import { useState } from 'react';
 
 
+
+
+
 const App = () => {
   const [light, setLight] = useState(false)
   const islight = light == true
@@ -13,8 +16,8 @@ const App = () => {
   const lightTheme = islight? 'bg-white'  : 'bg-slate-800'
   const lightBg = islight ? lightImg : darkImg
   return (
-    <div className={`h-auto w-full ${lightTheme} body`}>
-      <img src={lightBg}/>
+    <div className={`h-auto w-full transition-all  ${lightTheme} body`}>
+      <img src={lightBg} className=' transition-all.26+ '/>
       <div className=' h-full flex items-center justify-center pb-72 todo-container'>
         
         <Todo setLight = {setLight} islight= {islight}/>
