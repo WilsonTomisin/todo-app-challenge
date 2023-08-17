@@ -5,15 +5,15 @@
     bottom: 10px;
     padding-left: 0px;
     cursor: pointer;
-    }
+}
 
-    .custom-checkbox input {
+.custom-checkbox input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    }
+}
 
-    .checkmark {
+.checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -22,32 +22,33 @@
     background: transparent;
     border: 2px solid  hsl(280, 87%, 65%);
     border-radius: 50%;
-    }
+}
 
-    .custom-checkbox:hover input ~ .checkmark {
+.custom-checkbox:hover input ~ .checkmark {
     background: linear-gradient( hsl(192, 100%, 67%) , hsl(280, 87%, 65%)) 
-    }
+}
 
-    .custom-checkbox input:checked ~ .checkmark {
+.custom-checkbox input:checked ~ .checkmark {
     background: linear-gradient( hsl(192, 100%, 67%) , hsl(280, 87%, 65%)) ;
     border-color: #2196F3;
-    }
+}
 
-    .checkmark:after {
+.checkmark:after {
     content: "";
     position: absolute;
     display: none;
-    }
+}
 
-    .custom-checkbox input:checked ~ .checkmark:after {
+.custom-checkbox input:checked ~ .checkmark:after {
     display: block;
     content: "\2713";
     color: white;
     font-size: 14px;
     top: 0px;
     left: 3px;
-    }
+}
 
 .add-btn{
-    background: linear-gradient( hsl(192, 100%, 67%) , hsl(280, 87%, 65%)) 
+    background: linear-gradient( hsl(192, 100%, 67%) , hsl(280, 87%, 65%));
+    transition: all 2000ms ease-in-out;
 }

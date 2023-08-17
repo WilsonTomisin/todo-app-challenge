@@ -39,7 +39,6 @@ export const Todo = ({islight, setLight}) => {
     const [ todo , setTodo] = useState(initialstate.todo)
     const [selectedLink, setSelectedLink] = useState('All')
     const [completedGoals, setcompletedGoals] = useState([])
-    const [activeGoals , setActiveGoals] = useState([])
     const inputRef = useRef(null)
     
     
@@ -57,7 +56,7 @@ export const Todo = ({islight, setLight}) => {
   return (
     <div className=' relative -top-32 w-auto  '>
       <div className=' flex items-center justify-between'>
-        <h1 className=' text-white font-bold text-3xl animate-pulse'>TODO</h1>
+        <h1 className=' text-white font-bold text-3xl animate-slow-bounce '>TODO</h1>
         <button className=' bg-transparent text-white rounded-xl text-xl font-bold animate-bounce' onClick={(e)=>{
             setLight((preval)=> !preval)
         }}>
@@ -70,7 +69,7 @@ export const Todo = ({islight, setLight}) => {
              value={todo} 
              ref={inputRef}
              onChange={(e)=>(setTodo(e.currentTarget.value))}/>
-            <button className=' rounded-lg relative left-1/2 -translate-x-1/2 mt-2 text-white bg-green-500 px-6 py-2 add-btn'
+            <button className=' rounded-lg relative left-1/2 -translate-x-1/2 mt-2 text-white bg-green-500 px-6 py-2 add-btn animate-pulse'
             onClick={(e)=>{
                 e.preventDefault()
                 inputRef.current.focus()
@@ -79,12 +78,12 @@ export const Todo = ({islight, setLight}) => {
                     const updatedGoal ={ id: Date.now() ,text: todo ,completed : false}
                     dispatch({type: 'add', payload: updatedGoal})
                 }
-                // console.log(todo)
+            
                 
             }}>Add a goal </button>
             {<Routes>
-               <Route path='/' element={<Todolist list={state} dispatch={dispatch}  setcompletedGoals={setcompletedGoals}  setActiveGoals={ setActiveGoals}  />} />
-               <Route path='/active' element={<Activegoals list={state} completedGoals={ completedGoals} activeGoals = { activeGoals}/>}/> 
+               <Route path='/' element={<Todolist list={state} dispatch={dispatch}  setcompletedGoals={setcompletedGoals}  />} />
+               <Route path='/active' element={<Activegoals list={state} />}/> 
                <Route path='/completed' element={<Completedgoals setcompletedGoals={setcompletedGoals} completedGoals={completedGoals} list={state}/>}/>
                 
             </Routes>}
