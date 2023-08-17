@@ -4,7 +4,3 @@
     font-family: 'Josefin Sans', sans-serif;
     
 }
-
-.todo-container{
-    min-height: calc( 100vh- padding-top(300px));
-}

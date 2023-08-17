@@ -57,8 +57,8 @@ export const Todo = ({islight, setLight}) => {
   return (
     <div className=' relative -top-32 w-auto  '>
       <div className=' flex items-center justify-between'>
-        <h1 className=' text-white font-bold text-3xl'>TODO</h1>
-        <button className=' bg-transparent text-white rounded-xl text-xl font-bold' onClick={(e)=>{
+        <h1 className=' text-white font-bold text-3xl animate-pulse'>TODO</h1>
+        <button className=' bg-transparent text-white rounded-xl text-xl font-bold animate-bounce' onClick={(e)=>{
             setLight((preval)=> !preval)
         }}>
             { !islight ? <BsFillSunFill/> : <BsFillMoonFill/> }
@@ -70,7 +70,7 @@ export const Todo = ({islight, setLight}) => {
              value={todo} 
              ref={inputRef}
              onChange={(e)=>(setTodo(e.currentTarget.value))}/>
-            <button className=' rounded-lg relative left-1/2 -translate-x-1/2 mt-2 text-white bg-green-500 px-6 py-2 add-btn '
+            <button className=' rounded-lg relative left-1/2 -translate-x-1/2 mt-2 text-white bg-green-500 px-6 py-2 add-btn'
             onClick={(e)=>{
                 e.preventDefault()
                 inputRef.current.focus()
