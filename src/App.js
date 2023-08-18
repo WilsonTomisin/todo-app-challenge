@@ -19,10 +19,11 @@ const App = () => {
   return (
     <div className={` tablet:h-full mobile:h-full w-full transition duration-1000 ease-out  ${lightTheme} body`}>
       <img src={lightBg} className=' transition-all.26+'/>
-      <div className=' h-full flex items-center justify-center pb-20 mobile:p-9 mobile:mt-16 tablet:mt-0'>
-        
+      <div className=' h-full flex items-center justify-center mobile:p-9 mobile:mt-16 tablet:mt-0 '>
         <Todo setLight = {setLight} islight= {islight}/>
       </div>
+      <div className=' text-slate-600 pb-20 text-center'>Drag and drop to reorder list</div>
+      
       <Footer islight={islight}/>
     </div>
   )

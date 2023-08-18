@@ -42,7 +42,18 @@ export const Todo = ({islight, setLight}) => {
     const inputRef = useRef(null)
     
     
-    
+    const handleClick =()=>{
+        inputRef.current.focus()
+        setTodo('')
+        if (todo.length > 3) {
+            const updatedGoal ={ id: Math.random().toString() ,text: todo ,completed : false}
+            console.log(updatedGoal.id)
+            console.log(typeof(updatedGoal.id));
+            dispatch({type: 'add', payload: updatedGoal})
+        }
+        
+        
+    }
 
     
 
@@ -72,14 +83,7 @@ export const Todo = ({islight, setLight}) => {
             <button className=' rounded-lg relative left-1/2 -translate-x-1/2 mt-2 text-white bg-green-500 px-6 py-2 add-btn animate-pulse'
             onClick={(e)=>{
                 e.preventDefault()
-                inputRef.current.focus()
-                setTodo('')
-                if (todo.length > 3) {
-                    const updatedGoal ={ id: Date.now().toString() ,text: todo ,completed : false}
-                    dispatch({type: 'add', payload: updatedGoal})
-                }
-            
-                
+                handleClick()
             }}>Add a goal </button>
             {<Routes>
                <Route path='/' element={<Todolist list={state} dispatch={dispatch}  setcompletedGoals={setcompletedGoals}  />} />
