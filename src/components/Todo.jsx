@@ -75,7 +75,7 @@ export const Todo = ({islight, setLight}) => {
                 inputRef.current.focus()
                 setTodo('')
                 if (todo.length > 3) {
-                    const updatedGoal ={ id: Date.now() ,text: todo ,completed : false}
+                    const updatedGoal ={ id: Date.now().toString() ,text: todo ,completed : false}
                     dispatch({type: 'add', payload: updatedGoal})
                 }
             
