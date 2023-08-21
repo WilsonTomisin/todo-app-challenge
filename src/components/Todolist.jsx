@@ -9,7 +9,6 @@ export const Todolist = ({ list, dispatch, setcompletedGoals }) => {
     const isPlural = newArr.length > 1 ? 'goals' : 'goal';
 
     const handleDrag=(results)=>{
-        console.log(results)
         const {source, destination} = results
         if (!destination) return ;
         if (source.index == destination.index)  return;
@@ -17,18 +16,17 @@ export const Todolist = ({ list, dispatch, setcompletedGoals }) => {
         const ReorderedItems = [...Data]
         const [reorderedItem] = ReorderedItems.splice(source.index, 1);
         ReorderedItems.splice(destination.index, 0, reorderedItem);
-        // console.log(newArr);
+        
         setData(ReorderedItems)
     }
     React.useEffect(()=>{
         setData(list.todo)
     },[list.todo])
 return (
-    <div className=' shadow-lg'>
-        <DragDropContext onDragEnd={handleDrag}>
+    <DragDropContext onDragEnd={handleDrag}>
         <Droppable droppableId='ROOT' type='group'>
             {(provided)=>(
-                <div {...provided.droppableProps} ref={provided.innerRef} className=' mt-4 bg-slate-900 rounded-lg text-white font-semibold border-b-2 border-slate-500  '>
+                <div {...provided.droppableProps} ref={provided.innerRef} className=' mt-4 bg-slate-900 rounded-lg text-white font-semibold border-b-2 border-slate-500 shadow-xl shadow-slate-900  '>
                     { Data.map((item, index)=>{
                         const acheived = item.disabled == true ? 'achieved':'' ;
                         const disabledCheckbox = item.disabled === true ? 'checked' :''
@@ -73,7 +71,7 @@ return (
                 </div>
             )}
         </Droppable>
-        </DragDropContext>
-    </div>
+    </DragDropContext>
+    
   )
 }

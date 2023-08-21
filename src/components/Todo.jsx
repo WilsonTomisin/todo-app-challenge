@@ -6,6 +6,7 @@ import { Activegoals } from './Activegoals'
 import { Completedgoals } from './Completedgoals'
 import { BsFillSunFill, BsFillMoonFill} from 'react-icons/bs'
 import { Route, Routes, Link} from 'react-router-dom';
+import { datalinks } from '../context/constants'
 
 export const Todo = ({islight, setLight}) => {
     const initialstate ={
@@ -14,13 +15,12 @@ export const Todo = ({islight, setLight}) => {
     const stateReducer =(state ,action)=>{
         if (action.type == 'add') {
             const Newgoal = action.payload
-            console.log(`new goal added: ${Newgoal.text}`);
             return {
                 ...state,
                 todo:[...state.todo, Newgoal]
             }
         } else if( action.type == 'remove'){
-            console.log('removed todo item.')
+            
             return{
                 todo: state.todo.filter((item)=> item.id !== action.payload)
             }
@@ -46,23 +46,18 @@ export const Todo = ({islight, setLight}) => {
         inputRef.current.focus()
         setTodo('')
         if (todo.length > 3) {
-            const updatedGoal ={ id: Math.random().toString() ,text: todo ,completed : false}
-            console.log(updatedGoal.id)
-            console.log(typeof(updatedGoal.id));
+            const updatedGoal ={ 
+                id: Math.random().toString(), // id has to be converted into a string because the of the beutiful-dnd
+                text: todo ,
+                completed : false
+            }
             dispatch({type: 'add', payload: updatedGoal})
         }
         
         
     }
 
-    
 
- 
-    const datalinks =[
-        {text:'All', path: '/'},
-        {text: 'active', path:'/active'},
-        {text:'completed', path:'/completed'}
-    ]
     
   return (
     <div className=' relative -top-32 w-auto  '>
@@ -91,7 +86,7 @@ export const Todo = ({islight, setLight}) => {
                <Route path='/completed' element={<Completedgoals setcompletedGoals={setcompletedGoals} completedGoals={completedGoals} list={state}/>}/>
                 
             </Routes>}
-            <div className=' bg-slate-900 text-white flex items-center justify-between text-sm font-medium p-5'>
+            <div className=' bg-slate-900 text-white flex items-center justify-between text-sm font-medium p-5 shadow-2xl shadow-black'>
                 <div className=' pr-2'>{state.todo.length - completedGoals.length} items left</div>
                 <ul className=' flex items-center justify-between  px-5'>
                     {datalinks.map((item,index)=>{
@@ -100,7 +95,7 @@ export const Todo = ({islight, setLight}) => {
                         return(
                             <li  key={index} className={`${padding} ${active}`} onClick={(e)=>{
                             setSelectedLink(item.text)
-                            console.log(selectedLink)
+                            
                             }}>
                                 <Link to={item.path}>
                                     {item.text}

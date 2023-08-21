@@ -1,17 +1,13 @@
 import React from 'react'
-import { BsTwitter, BsMedium, BsGithub} from 'react-icons/bs'
+import { links } from '../context/constants'
 
 export const Footer = ({islight}) => {
-    const links =[
-        {icon: <BsTwitter/> , link : 'https://twitter.com/WilsonTomisin'},
-        {icon: <BsMedium/> , link: 'https://medium.com/@tommywilson972'},
-        { icon: <BsGithub/> , link : 'https://github.com/WilsonTomisin'}
-    ]
+    
     const isWhite = !islight ? "text-white" : "text-slate-900"
   return (
     <div className={` text-xl ${isWhite} font-bold h-auto width-full flex tablet:flex-row tablet:justify-between p-8 mobile:flex-col-reverse mobile:items-center`}>
         <span className=' animate-pulse'>Created by WilsonTomisin</span>
-        <ul className=' flex items-center justify-between mobile:mb-7 tablet:mb-0'>
+        <ul className=' flex items-center justify-between mobile:mb-7 tablet:mb-0 '>
            {links.map((item, index)=>{
             const paddingx = index==1 ? 'px-4' : ''
             return(
@@ -20,7 +16,11 @@ export const Footer = ({islight}) => {
                 </li>
             )
            })}
+           
         </ul>
+        <span className=' animate-bounce mobile:mb-4 tablet:mb-0'>
+           Challenge by <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW" target="_blank">Frontend Mentor</a>.
+        </span>
     </div>
   )
 }

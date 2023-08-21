@@ -3,9 +3,7 @@
     transition: 0.5s opacity ease-in-out;
     
 }
-.goal{
-    /* background-color: #12ac; */
-}
+
 .goal:hover .remove-btn{
     opacity: 1;
 }
